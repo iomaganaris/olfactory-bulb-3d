@@ -44,14 +44,11 @@ def prun(tstop):
 
   tnext_clean = clean_weights_interval
 
-  if params.dump_model:
-      pc.nrnbbcore_write('coredat')
-      print('Dumping model and exiting')
-      return
   # if coreneuron is enabled, run it with coreneuron
   if params.coreneuron:
     from neuron import coreneuron
     coreneuron.enable = True
+    coreneuron.filemode = params.filemode
     coreneuron.gpu = params.gpu
     if params.gpu:
       coreneuron.cell_permute = 2
